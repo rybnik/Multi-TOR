@@ -31,6 +31,6 @@ do
 
 	# Take into account that authentication for the control port is disabled. Must be used in secure and controlled environments
 	echo "Running: tor --RunAsDaemon 1 --CookieAuthentication 0 --HashedControlPassword \"\" --ControlPort $control_port --PidFile tor$i.pid --SocksPort $socks_port --DataDirectory data/tor$i"
-
-	tor --RunAsDaemon 1 --CookieAuthentication 0 --HashedControlPassword "" --ControlPort $control_port --PidFile tor$i.pid --SocksPort $socks_port --DataDirectory data/tor$i
+	# This tor instance will accept any incomming connection
+	tor --RunAsDaemon 1 --CookieAuthentication 0 --HashedControlPassword "" --SocksListenAddress "0.0.0.0" --SocksPolicy "accept *" --ControlPort $control_port --PidFile tor$i.pid --SocksPort $socks_port --DataDirectory data/tor$i
 done
